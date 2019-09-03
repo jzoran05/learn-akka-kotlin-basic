@@ -5,14 +5,12 @@ import akka.actor.Props
 fun main() {
     val system = ActorSystem.create("test")
     val actor = system.actorOf(MyAkkaActor03.props())
-    actor.tell("hello", ActorRef.noSender())
+    actor.tell("hello") // using extension function to omit use of ActorRef.noSender() parameter
+    actor.tell("test")
 }
 
 // extension functions
-//private fun ActorRef.tell(s: String) {
+private fun ActorRef.tell(s: String) {
+    this.tell(s, ActorRef.noSender())
+}
 
-//}
-
-//private fun <T> ActorSystem.actorOf(): Any {
-
-//}
